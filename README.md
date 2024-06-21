@@ -28,27 +28,33 @@
 - npm or yarn
 - MetaMask or any Ethereum wallet
 
+
+
 ### Installation
-1. **Clone the Repository:**
-    \`\`\`bash
-    git clone https://github.com/MomenMushtaha/1921NFTMarketplace.git
-    cd 1921NFTMarketplace
-    \`\`\`
+To use this application as your own, follow these simple steps:
+<!-- 
+>- 
+>- 
+>-  -->
+<ul>
+<li><p>
 
-2. **Install Dependencies:**
-    \`\`\`bash
-    yarn install
-    \`\`\`
+Clone the Repository (`git clone https://github.com/MomenMushtaha/1921NFTMarketplace.git`)
+</p></li>
+<li><p>
+    
+Install Dependencies (`yarn install`)
+</p></li>
+<li><p>
 
-3. **Build with Next.js:**
-    \`\`\`bash
-    yarn next build
-    \`\`\`
-  
-4. **Start the Application:**
-    \`\`\`bash
-    yarn start
-    \`\`\`
+Build with Next.js (`yarn next build`)
+</p></li>
+<li><p>
+
+Run Project (`yarn start`)
+</p></li>
+</ul>
+
 
 ## Usage
 - **Minting NFTs:** Users can mint new NFTs by uploading digital assets.
