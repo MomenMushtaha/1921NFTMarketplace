@@ -1,4 +1,4 @@
-import { title } from 'process'
+// Importing necessary libraries and components
 import { useContext, useEffect, useState } from 'react'
 import Header from '../components/Header'
 import NftCard from '../components/NftCard'
@@ -11,34 +11,20 @@ import { HiDotsVertical } from 'react-icons/hi'
 import { BsFillShareFill } from 'react-icons/bs'
 import ProfileCard from '../components/ProfileCard'
 
-
-const style = {
-  bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
-  bannerImage: `w-full object-cover`,
-  infoContainer: `w-screen px-4`,
-  midRow: `w-fit md:w-full  flex justify-center text-`,
-  endRow: `w-full flex justify-end text-[#ffcccb]`,
-  profileImg: `w-40 h-40 object-cover rounded-full border-2 border-[#FF474C] mt-[-4rem]`,
-  socialIconsContainer: `flex text-3xl mb-[-2rem] invisible md:visible`,
-  socialIconsWrapper: `w-40`,
-  socialIconsContent: `flex container justify-between text-[1.4rem] border-2 rounded-lg px-2`,
-  socialIcon: `my-2`,
-  divider: `border-r-2`,
-  title: `text-4xl font-semibold mb-4`,
-  createdBy: `text-lg mb-4`,
-  statsContainer: `w-[44vw] flex justify-between py-4 border border-[#FF474C] rounded-xl mb-4`,
-  collectionStat: `w-1/4`,
-  statValue: `text-3xl font-bold w-full flex items-center justify-center`,
-  ethLogo: `h-6 mr-2`,
-  statName: `text-lg w-full text-center mt-1`,
-  description: `text-[#FF474C] text-xl w-max-1/4 flex-wrap mt-4`,
-}
-
+/**
+ * Profile component
+ *
+ * This component is responsible for rendering the profile page.
+ * It fetches and displays data related to the current account and its transaction history.
+ *
+ * @returns {JSX.Element} The profile page.
+ */
 export default function Profile() {
   const { isLoading, currentAccount } = useContext(TransactionContext)
   const [transactionHistory, setTransactionHistory] = useState([])
   const [userName, setUserName] = useState()
 
+  // Fetch transaction history when the current account changes
   useEffect(() => {
     ; (async () => {
       if (!isLoading && currentAccount) {
@@ -55,6 +41,7 @@ export default function Profile() {
     })()
   }, [isLoading, currentAccount])
 
+  // Set the username when the current account changes
   useEffect(() => {
     if (!currentAccount) return
 
@@ -65,90 +52,75 @@ export default function Profile() {
   }, [currentAccount])
 
   return (
-    <div className="overflow-hidden">
-      {/* <h1 className="text-lg text-white text-4xl text-center">Profile Page</h1> */}
-
-      <div className={style.bannerImageContainer}>
-        <img
-          className={style.bannerImage}
-          src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          alt="banner"
-        />
-      </div>
-
-      <div className={style.infoContainer}>
-        <div className={style.midRow}>
+      <div className="overflow-hidden">
+        {/* Banner */}
+        <div className="h-[20vh] w-screen overflow-hidden flex justify-center items-center">
           <img
-            className={style.profileImg}
-            alt="profile image"
-            src="https://www.publicdomainpictures.net/pictures/30000/velka/solid-red-background.jpg"
+              className="w-full object-cover"
+              src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              alt="banner"
           />
         </div>
 
-        <div className={style.endRow}>
-          <div className={style.socialIconsContainer}>
-            <div className={style.socialIconsWrapper}>
-              <div className={style.socialIconsContent}>
-                {/* <div className={style.socialIcon}>
-                                    <CgWebsite />
-                                </div>
+        {/* Profile Info */}
+        <div className="w-screen px-4">
+          <div className="w-fit md:w-full  flex justify-center text-">
+            <img
+                className="w-40 h-40 object-cover rounded-full border-2 border-[#FF474C] mt-[-4rem]"
+                alt="profile image"
+                src="https://www.publicdomainpictures.net/pictures/30000/velka/solid-red-background.jpg"
+            />
+          </div>
 
-                                <div className={style.divider}></div>
+          <div className="w-full flex justify-end text-[#ffcccb]">
+            <div className="flex text-3xl mb-[-2rem] invisible md:visible">
+              <div className="w-40">
+                <div className="flex container justify-between text-[1.4rem] border-2 rounded-lg px-2">
+                  <div className="my-2">
+                    <BsFillShareFill />
+                  </div>
 
-                                <div className={style.socialIcon}>
-                                    <AiOutlineInstagram />
-                                </div>
+                  <div className="border-r-2"></div>
 
-                                <div className={style.divider}></div> */}
-
-                <div className={style.socialIcon}>
-                  <BsFillShareFill />
-                </div>
-
-                <div className={style.divider}></div>
-
-                <div className={style.socialIcon}>
-                  <HiDotsVertical />
+                  <div className="my-2">
+                    <HiDotsVertical />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={style.midRow}>
-          <div className={style.title}>Unnamed</div>
-        </div>
+          <div className="w-fit md:w-full  flex justify-center text-">
+            <div className="text-4xl font-semibold mb-4">Unnamed</div>
+          </div>
 
-        <div className={style.midRow}>
-          <div className="border-red-100 flex items-center rounded-xl border px-8 py-2">
-            <img
-              className={style.ethLogo}
-              src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
-              alt="eth"
-            />
-            <div className="font-light ">{userName}</div>
+          <div className="w-fit md:w-full  flex justify-center text-">
+            <div className="border-red-100 flex items-center rounded-xl border px-8 py-2">
+              <img
+                  className="h-6 mr-2"
+                  src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
+                  alt="eth"
+              />
+              <div className="font-light ">{userName}</div>
+            </div>
           </div>
         </div>
 
-        {/* <div className={style.midRow}>
-                    <div className={style.title}>timestamp</div>
-                </div> */}
-      </div>
+        {/* Collected NFTs */}
+        <div>
+          <h2 className="py-5 pl-20 text-2xl font-semibold text-[#ffcccb] ">
+            Collected Nfts
+          </h2>
+        </div>
+        <hr />
+        <br />
 
-      <div>
-        <h2 className="py-5 pl-20 text-2xl font-semibold text-[#ffcccb] ">
-          Collected Nfts
-        </h2>
+        <div className="flex flex-wrap">
+          {transactionHistory &&
+              transactionHistory?.map((transaction, id) => (
+                  <ProfileCard key={id} nftItem={transaction} />
+              ))}
+        </div>
       </div>
-      <hr />
-      <br />
-
-      <div className="flex flex-wrap">
-        {transactionHistory &&
-          transactionHistory?.map((transaction, id) => (
-            <ProfileCard key={id} nftItem={transaction} />
-          ))}
-      </div>
-    </div>
   )
 }

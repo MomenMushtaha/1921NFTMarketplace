@@ -1,38 +1,38 @@
-import React from 'react'
-import Header from '../../components/Header'
-import { useRouter } from 'next/router'
-import { useEffect, useState, useContext } from 'react'
-import GeneralDetails from '../../components/nft/GeneralDetails'
-import ItemActivity from '../../components/nft/ItemActivity'
-import { sanityClient } from '../../sanity'
-import { client } from '../../lib/sanityClient'
-import Purchase from '../../components/nft/Purchase'
-import { urlFor } from '../../sanity'
-import { IoMdSnow } from 'react-icons/io'
-import { AiOutlineHeart } from 'react-icons/ai'
-import NFTImage from '../../components/nft/NFTImage'
-import { TransactionContext } from '../../context/TransactionContext'
-import Modal from 'react-modal'
-import TransactionLoader from '../../components/TransactionLoader'
-import Footer from '../../components/Footer'
-// import TransactionContext from '../../context/TransactionContext'
-import WelcomeUser from '../../components/toast/WelcomeUser'
+import React, { useEffect, useState, useContext } from 'react';
+import { useRouter } from 'next/router';
+import Modal from 'react-modal';
+import { IoMdSnow } from 'react-icons/io';
+import { AiOutlineHeart } from 'react-icons/ai';
 
+import Header from '../../components/Header';
+import GeneralDetails from '../../components/nft/GeneralDetails';
+import ItemActivity from '../../components/nft/ItemActivity';
+import { sanityClient } from '../../sanity';
+import { client } from '../../lib/sanityClient';
+import Purchase from '../../components/nft/Purchase';
+import { urlFor } from '../../sanity';
+import NFTImage from '../../components/nft/NFTImage';
+import { TransactionContext } from '../../context/TransactionContext';
+import TransactionLoader from '../../components/TransactionLoader';
+import Footer from '../../components/Footer';
+import WelcomeUser from '../../components/toast/WelcomeUser';
 
-Modal.setAppElement('#__next')
+// Set the root element for the modal to avoid accessibility issues
+Modal.setAppElement('#__next');
 
+// Styles for various elements in the Nft component
 const style = {
   wrapper: `flex flex-col items-center container-lg text-[#ffcccb] overflow-hidden`,
   container: `container p-6`,
   topContent: `flex`,
   nftImgContainer: `flex-1 mr-4`,
   detailsContainer: `flex-[2] ml-4`,
-
   topBar: `bg-[#ffcccb] p-2 rounded-t-lg border-[#ffcccb] border`,
   topBarContent: `flex items-center`,
   likesCounter: `flex-1 flex items-center justify-end`,
-}
+};
 
+// Custom styles for the modal
 const customStyles = {
   content: {
     top: '50%',
@@ -47,112 +47,104 @@ const customStyles = {
   overlay: {
     backgroundColor: 'rgba(10, 11, 13, 0.75)',
   },
-}
+};
 
+/**
+ * Nft component
+ *
+ * This component is responsible for displaying the details of a specific NFT.
+ * It fetches and displays data related to the NFT.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.selectedNft - The selected NFT.
+ *
+ * @returns {JSX.Element} A page for a specific NFT.
+ */
 const Nft = ({ selectedNft }) => {
-  const { formData, NftData, handleImage, handleName, handleChange, sendTransaction, currentAccount } = useContext(TransactionContext)
+  const { formData, NftData, handleImage, handleName, handleChange, sendTransaction, currentAccount } = useContext(TransactionContext);
 
-  // const [ listings, setlistings ] = useState([])
-  // console.log("location", window.location.href)
+  const router = useRouter();
+  const { check } = router.query;
 
+  // Set up payment details when selectedNft changes
+  useEffect(() => {
+    handleChange(selectedNft.price ? selectedNft.price : '0.1');
+    handleImage(selectedNft.imageTest);
+    handleName(selectedNft.caption);
+  }, [selectedNft, handleChange, handleImage, handleName]);
 
-  const router = useRouter()
-  const { check } = router.query
-  // const [selectedNft, setSelectedNft] = useState({})
-
-
-  //Payment Configurations
-  const price = handleChange(selectedNft.price ? selectedNft.price : "0.1")
-  const image = handleImage(selectedNft.imageTest)
-  const name = handleName(selectedNft.caption)
-
-
-
+  // Handle form submission to send a transaction
   const handleSubmit = async (e) => {
-    const { addressTo, amount } = formData
-    const { image, name } = NftData
-    e.preventDefault()
+    e.preventDefault();
+    const { addressTo, amount } = formData;
+    const { image, name } = NftData;
 
-    // console.log('got image', image)
-    // console.log('got name', name)
+    // Check if all required fields are filled
+    if (!addressTo || !amount || !image || !name) return;
 
-    if (!addressTo || !amount || !image || !name) return
-
-
-
-    sendTransaction()
-
-
-  }
-
+    // Send the transaction
+    sendTransaction();
+  };
 
   return (
-    <div className='overflow-hidden'>
-      <div className={style.wrapper}>
-        <div className={style.container}>
-          <div className={style.topContent}>
-            <div className={style.nftImgContainer}>
-              <NFTImage
-                selectedNft={selectedNft.imageTest?.asset}
-                alt={selectedNft?.caption}
-              />
+      <div className="overflow-hidden">
+        <Header />
+        <div className={style.wrapper}>
+          <div className={style.container}>
+            <div className={style.topContent}>
+              <div className={style.nftImgContainer}>
+                <NFTImage selectedNft={selectedNft.imageTest?.asset} alt={selectedNft?.caption} />
+              </div>
+              <div className={style.detailsContainer}>
+                <GeneralDetails selectedNft={selectedNft} />
+                <Purchase
+                    isListed={router.query.isListed}
+                    selectedNft={selectedNft}
+                    buyItem={(e) => handleSubmit(e)}
+                />
+              </div>
             </div>
-            <div className={style.detailsContainer}>
-              <GeneralDetails selectedNft={selectedNft} />
-              <Purchase
-                isListed={router.query.isListed}
-                selectedNft={selectedNft}
-                // listings="true"
-                buyItem={(e) => handleSubmit(e)}
-              // Get the id from the route.query
-
-              />
-
-
+            <div className="md:visible invisible">
+              <ItemActivity />
             </div>
-          </div>
-          <div className="md:visible invisible">
-
-            <ItemActivity />
           </div>
         </div>
+        <Footer />
+        <Modal isOpen={!!router.query.loading} style={customStyles}>
+          <TransactionLoader />
+        </Modal>
       </div>
+  );
+};
 
-      <Footer />
-      <Modal isOpen={!!router.query.loading} style={customStyles}>
-        {/* <TransactionLoader /> */}
-      </Modal>
-    </div>
-  )
-}
-
+// Fetch data for the specific NFT from Sanity
 export async function getServerSideProps(context) {
-  const id = context.params
+  const { nftId } = context.params;
 
-
-  const query = `*[_type == "testImage" && _id == "${id.nftId}"][0]{
+  // GROQ query to fetch data for the specified NFT ID
+  const query = `*[_type == "testImage" && _id == "${nftId}"][0]{
     caption,
     imageTest,
     price,
-  }`
+  }`;
 
+  // Fetch the data from Sanity
+  const items = await sanityClient.fetch(query);
 
-  const items = await sanityClient.fetch(query)
-
-
+  // Return 404 if no items are found
   if (!items) {
     return {
       props: null,
       notFound: true,
-    }
-
+    };
   } else {
+    // Return the fetched data as props
     return {
       props: {
-        selectedNft: items
-      }
-    }
+        selectedNft: items,
+      },
+    };
   }
 }
 
-export default Nft
+export default Nft;

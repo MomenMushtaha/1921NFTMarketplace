@@ -1,18 +1,8 @@
-import { useWeb3 } from '@3rdweb/hooks'
-import Head from 'next/head'
-import { useContext, useEffect } from 'react'
 import { sanityClient } from '../sanity'
-import Header from '../components/Header'
 import Hero from '../components/Hero'
-import { client } from '../lib/sanityClient'
-import toast, { Toaster } from 'react-hot-toast' // Receiving toast
-import { title } from 'process'
 import HomeCard from '../components/HomeCard'
-import { urlFor } from '../sanity'
-import Link from 'next/link'
 import Footer from '../components/Footer'
 import SmallCard from '../components/SmallCard'
-// import { TransactionContext } from '../context/TransactionContext'
 
 const style = {
   wrapper: `overflow-hidden`,
@@ -23,22 +13,25 @@ const style = {
   sectionContainer: `max-w-7xl mx-auto px-8 sm:px-16 pt-6`,
 }
 
+/**
+ * Home component
+ *
+ * This component is responsible for rendering the home page.
+ * It fetches and displays data related to all items.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Array} props.items - The items.
+ *
+ * @returns {JSX.Element} The home page.
+ */
 export default function Home({ items }) {
-  // const { isLoading, currentAccount } = useContext(TransactionContext)
-
-  // useEffect(() => {
-  //   setIs
-
-  // }, [isLoading, currentAccount])
 
   return (
     <div className={style.wrapper}>
       {/* {address ? (   //Conditional Rendering */}
-
       <>
         <div className="section1">
           <Hero />
-
           <br />
         </div>
 
