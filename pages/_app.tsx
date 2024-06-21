@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className='overflow-hidden'>
       <Head>
-        <title>Base Mint</title>
+        <title>1921Marketplace</title>
         <link rel="icon" href="/opensea.ico" />
       </Head>
 

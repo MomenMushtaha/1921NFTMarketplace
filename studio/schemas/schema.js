@@ -1,13 +1,13 @@
-// First, we must import the schema creator
+// Importing the schema creator
 import createSchema from 'part:@sanity/base/schema-creator'
 
-// Then import schema types from any plugins that might expose them
+// Importing schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
+
+// Importing the schemas for the documents
 import itemImage from './itemImage'
 import testImage from './testImage'
-import blogPost from './blogPost'
 import transactionSchema from './transactionSchema'
-import { type } from 'os'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -15,9 +15,10 @@ export default createSchema({
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat(
-    [
-      {
+  types: schemaTypes.concat([
+
+        // The 'users' document schema
+        {
         name: 'users',
         title: 'Users',
         type: 'document',
@@ -66,6 +67,7 @@ export default createSchema({
         ],
       },
 
+        // The 'marketItems' document schema
       {
         name: 'marketItems',
         title: 'Market Items',
@@ -135,19 +137,6 @@ export default createSchema({
       itemImage,
       testImage,
       transactionSchema,
-
-      {
-        name: 'blogs',
-        title: 'Blogs',
-        type: 'document',
-
-        fields: [
-          {
-            name: 'blogTitle',
-            title: 'Title',
-            type: 'string',
-          },
-
           {
             name: 'description',
             title: 'Descripton',
@@ -173,28 +162,6 @@ export default createSchema({
             title: 'Main Image',
             type: 'image',
           },
-
-
-          {
-            name: 'blogDetails',
-            title: 'Blog Details',
-            type: 'array',
-            of: [{ type: 'reference', to: [{ type: "blogPost" }] }],
-          },
-
-          // {
-          //   name: "refReview",
-          //   title: "Reviews",
-          //   type: "array",
-          //   of: [{ type: "reference", to: [{ type: "reviews" }] }],
-          // },
-
-        ],
-      },
-
-      blogPost,
-
-
       {
         name: "reviews",
         title: "Reviews",

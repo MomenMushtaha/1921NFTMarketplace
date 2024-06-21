@@ -12,7 +12,7 @@ import { GrClose } from 'react-icons/gr'
 import { AiOutlineClose } from 'react-icons/ai'
 
 const style = {
-  wrapper: `bg-[#8B0000] w-screen px-[1.2rem] py-[0.8rem] md:flex md:justify-between`,
+  wrapper: `flex items-center justify-between bg-[#8B0000] w-screen px-[1.2rem] py-[0.8rem]`,
   logoContainer: `flex items-center cursor-pointer`,
   logoText: ` ml-[0.8rem] text-[#ffcccb] font-semibold text-2xl`,
   searchBar: `flex flex-1 mx-[0.8rem] w-max-[520px] items-center md:bg-[#f73455] rounded-[0.8rem] hover:bg-[#f73455]`,
@@ -20,11 +20,9 @@ const style = {
   searchInput: `h-[2.6rem] w-full border-0 bg-transparent outline-0 ring-0 px-2 pl-0 text-[#ffcccb] placeholder:text-[#ffcccb]`,
   headerItems: ` md:flex md:items-center justify-end bg-[#ffcccb] md:bg-inherit z-[1] md:z-auto md:static absolute left-0 h-1/3 w-full md:w-auto rounded-xl md:opacity-100 opacity-0`,
   MenuItems: ` md:flex md:items-center justify-end bg-inherit md:bg-inherit z-[1] md:z-auto md:static absolute left-0  w-full md:w-auto rounded-xl md:opacity-100 opacity-100 mt-3`,
-
   headerItem: `text-[#ffcccb] px-4 font-bold md:text-[#ffcccb] hover:text-[#ffcccb] duration-500 cursor-pointer py-2`,
   headerIcon: `text-[#8B0000] text-3xl font-black px-4 hover:text-[#ffcccb] duration-500 cursor-pointer`,
   addressProfile: `flex items-center space-x-2 pt-0 md:pt-0`,
-
   buttonsContainer: `flex w-1/4 justify-end items-center`,
   button: `flex items-center md:bg-[#8B0000] bg-none rounded-2xl mx-2 text-[0.9rem] font-semibold cursor-pointer`,
   buttonPadding: `p-2`,
@@ -51,127 +49,89 @@ const Header = () => {
     setUserName(finalStr)
   }, [currentAccount])
 
-  // Dropdown Menu
-  // function menu(e) {
-  //   e.preventDefault()
-  //   console.log('You clicked on this menu icon ')
-  //   setcheckMenu(false)
-  //   console.log(checkMenu)
-
   return (
-    <div className={style.wrapper}>
-      <div className="flex items-center justify-between">
-        <Link href="/">
+      <div className={style.wrapper}>
+        <div className="flex items-center">
+          <Link href="/">
           <span className={style.logoContainer}>
             <Image src={appLogo} height={40} width={40} />
-            <div className={style.logoText}>BaseMint</div>
+            <div className={style.logoText}>1921Marketplace</div>
           </span>
-        </Link>
+          </Link>
 
-        <span className=" block flex items-center justify-center text-3xl text-[#ffcccb] md:hidden">
-          {currentAccount ? (
-            <div className={`${style.headerIcon} ${style.addressProfile} `}>
-              <Link href="/profile">
-                <div className="flex items-center">
-                  <CgProfile />
-
-                  <div className={`${style.button} ${style.buttonPadding}`}>
-                    <div className={style.buttonTextContainer}>{userName}</div>
-                  </div>
-                </div>
-              </Link>
+          <div className={style.searchBar}>
+            <div className={style.searchIcon}>
+              <AiOutlineSearch />
             </div>
-          ) : (
-            ''
-          )}
 
-          <div className="text-[#ffcccb]" onClick={() => setcheckMenu(!checkMenu)}>
-            <div className="cursor-pointer">
-              {checkMenu ? <HiMenu /> : <AiOutlineClose />}
-            </div>
-          </div>
-        </span>
-      </div>
-
-      <div className={style.searchBar}>
-        <div className={style.searchIcon}>
-          <AiOutlineSearch />
-        </div>
-
-        <input
-          className={style.searchInput}
-          placeholder="Search items, collections and accounts"
-        />
-      </div>
-      <Toaster position="top-center" reverseOrder={false} />
-
-      {!currentAccount ? (
-        <div className={`${checkMenu ? style.headerItems : style.MenuItems}`}>
-          <Link href="/">
-            <div className={style.headerItem}> Home </div>
-          </Link>
-
-          <Link href="/collections">
-            <div className={style.headerItem}> Collections </div>
-          </Link>
-
-          <Link href="/allnfts">
-            <div className={style.headerItem}> NFTs </div>
-          </Link>
-
-          <Link href="/blog">
-            <div className={style.headerItem}>NFT Blog</div>
-          </Link>
-        </div>
-      ) : (
-        ''
-      )}
-
-      {currentAccount ? (
-
-        <div className={`${checkMenu ? style.headerItems : style.MenuItems}`}>
-          <Link href="/">
-            <div className={style.headerItem}> Home </div>
-          </Link>
-
-          <Link href="/collections">
-            <div className={style.headerItem}> Collections </div>
-          </Link>
-
-          <Link href="/allnfts">
-            <div className={style.headerItem}> NFTs </div>
-          </Link>
-
-          <Link href="/blog">
-          <div className={style.headerItem}>NFT Blog</div>
-        </Link>
-
-          {checkMenu ? (
-            <div className={`${style.headerIcon} ${style.addressProfile} `}>
-              <Link href="/profile">
-                <div className="flex items-center">
-                  <CgProfile />
-                  <div className={`${style.button} ${style.buttonPadding}`}>
-                    <div className={style.buttonTextContainer}>{userName}</div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ) : (
-            ''
-          )}
-        </div>
-      ) : (
-        <div
-          onClick={() => connectWallet()}
-          className={`${style.button} ${style.buttonPadding}`}
-        >
-          <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
-            Connect Wallet
+            <input
+                className={style.searchInput}
+                placeholder="Search items, collections and accounts"
+            />
           </div>
         </div>
-      )}
-    </div>
+
+        <Toaster position="top-center" reverseOrder={false} />
+
+        {!currentAccount ? (
+            <div className={`${checkMenu ? style.headerItems : style.MenuItems}`}>
+              <Link href="/">
+                <div className={style.headerItem}> Home </div>
+              </Link>
+
+              <Link href="/collections">
+                <div className={style.headerItem}> Collections </div>
+              </Link>
+
+              <Link href="/allnfts">
+                <div className={style.headerItem}> NFTs </div>
+              </Link>
+            </div>
+        ) : (
+            ''
+        )}
+
+        {currentAccount ? (
+
+            <div className={`${checkMenu ? style.headerItems : style.MenuItems}`}>
+              <Link href="/">
+                <div className={style.headerItem}> Home </div>
+              </Link>
+
+              <Link href="/collections">
+                <div className={style.headerItem}> Collections </div>
+              </Link>
+
+              <Link href="/allnfts">
+                <div className={style.headerItem}> NFTs </div>
+              </Link>
+
+              {checkMenu ? (
+                  <div className={`${style.headerIcon} ${style.addressProfile} `}>
+                    <Link href="/profile">
+                      <div className="flex items-center">
+                        <CgProfile />
+                        <div className={`${style.button} ${style.buttonPadding}`}>
+                          <div className={style.buttonTextContainer}>{userName}</div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+              ) : (
+                  ''
+              )}
+            </div>
+        ) : (
+            <div
+                onClick={() => connectWallet()}
+                className={`${style.button} ${style.buttonPadding}`}
+            >
+              <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
+                Connect Wallet
+              </div>
+            </div>
+        )}
+      </div>
   )
 }
 

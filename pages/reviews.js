@@ -1,5 +1,4 @@
 import React from 'react'
-import ReviewCard from '../components/blog/ReviewCard'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { sanityClient } from '../sanity'

@@ -1,14 +1,24 @@
+// Importing the necessary functions from the 'next-sanity' package
 import { createClient, createImageUrlBuilder } from 'next-sanity'
 
+// Defining the configuration for the Sanity client
 const config = {
+  // The dataset to use
   dataset: 'production',
+
+  // The project ID
   projectId: 'nm1pp7pw',
-  // apiVersion: '2021-03-25',
-  // token: 'skhfV0K4zdOkbzQJqoHM6yrj7L6WLsBm4PudItsS5eAlPfeZAYbVYGClJAq85PJc8igowqCZiCHBsLQoyg6m8kqira4cSjjVAYzizuVJGBMRfKlsZNFW0KwknfVixU1kOmdZWsVLUhT2kPqW5amAhloC1b948FBFgVyXzELAVbyVxdc0KCV3',
+
+  // Whether to use the CDN or not
   useCdn: false,
 }
 
-// formating the .jpg from sanity.io into a source attribute in an image tag.
+/**
+ * Function to format the .jpg from sanity.io into a source attribute in an image tag.
+ * @param {object} source - The source object
+ * @returns {string} - The URL for the image
+ */
 export const urlFor = (source) => createImageUrlBuilder(config).image(source)
 
+// Creating and exporting the Sanity client with the defined configuration
 export const sanityClient = createClient(config)

@@ -1,6 +1,8 @@
+// Importing necessary libraries and components
 import React from 'react'
 import styled from 'styled-components'
 
+// Defining the styles for the Screen component
 const Screen = styled.div`
   position: relative;
   height: 100vh;
@@ -22,8 +24,7 @@ const Screen = styled.div`
   }
 `;
 
-
-
+// Defining the styles for the Balls component
 const Balls = styled.div`
   display: flex;
   position: absolute;
@@ -65,27 +66,27 @@ const Balls = styled.div`
   }
 `;
 
-
-
-
+// LoadingScreen component
 const LoadingScreen = ({ loading }) => {
+  // The component returns a div with several child components
   return (
-    <div>
-      {loading ? (
-        <Screen>
-          <Balls>
-            <div className="ball one"></div>
-            <div className="ball two"></div>
-            <div className="ball three"></div>
-          </Balls>
-        </Screen>
-
-      ) : (
-        ''
-      )}
-
-    </div>
+      <div>
+        {loading ? (
+            // Screen Component
+            <Screen>
+              {/* Balls Component */}
+              <Balls>
+                <div className="ball one"></div>
+                <div className="ball two"></div>
+                <div className="ball three"></div>
+              </Balls>
+            </Screen>
+        ) : (
+            ''
+        )}
+      </div>
   );
 };
 
+// Exporting the LoadingScreen component
 export default LoadingScreen;

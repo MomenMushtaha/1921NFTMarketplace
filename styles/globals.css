@@ -1,58 +1,46 @@
+/* Importing the base, components, and utilities styles from Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Defining the root CSS variables */
 :root {
-    --main: #663e3e;
-    --shade_main: #5e0211;
+    --main: #663e3e; /* Main color */
+    --shade_main: #5e0211; /* Shade of the main color */
 }
 
-html,
-body {
-    background-color: var(--main);
-    margin: 0;
-    padding: 0;
-
+/* Setting the default styles for html and body */
+html, body {
+    background-color: var(--main); /* Using the main color as the background color */
+    margin: 0; /* Removing the default margin */
+    padding: 0; /* Removing the default padding */
 }
 
-
+/* Setting the default styles for anchor tags */
 a {
-    color: inherit;
-    text-decoration: none;
-
+    color: inherit; /* Inheriting the color from the parent element */
+    text-decoration: none; /* Removing the default underline decoration */
 }
 
-
+/* Setting the default styles for all elements */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* Including the padding and border in the element's total width and height */
 }
 
+/* Setting the styles for the section1 class */
 .section1 {
-    clip-path: polygon(0 0, 100% 0, 100% 94%, 0 98%);
+    clip-path: polygon(0 0, 100% 0, 100% 94%, 0 98%); /* Creating a polygon shape */
 }
 
+/* Setting the styles for the section3 class */
 .section3 {
-    clip-path: polygon(0 8%, 100% 1%, 100% 93%, 0% 100%);
-    background-color: var(--shade_main);
-
-
-
+    clip-path: polygon(0 8%, 100% 1%, 100% 93%, 0% 100%); /* Creating a polygon shape */
+    background-color: var(--shade_main); /* Using the shade of the main color as the background color */
 }
 
-.section2 h2,
-.section3 h2 {
-    display: flex;
-    justify-content: center;
-    color: #ffcccb
+/* Setting the styles for the h2 tags inside the section2 and section3 classes */
+.section2 h2, .section3 h2 {
+    display: flex; /* Using flexbox for layout */
+    justify-content: center; /* Centering the content horizontally */
+    color: #ffcccb; /* Setting the text color */
 }
-
-
-
-
-
-
-
-/* #checkkk {
-    max-height: 130px !important;
-    word-break: break-word !important;
-} */

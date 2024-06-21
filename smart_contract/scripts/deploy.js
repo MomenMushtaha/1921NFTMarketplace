@@ -1,20 +1,34 @@
+// Importing the necessary libraries
+const hre = require("hardhat");
 
-  
+// Main function that deploys the contract
 const main = async () => {
-  const transactionFactory = await hre.ethers.getContractFactory('Transactions')
-  const transactionContract = await transactionFactory.deploy()
+  // Getting the contract factory for 'Transactions'
+  const transactionFactory = await hre.ethers.getContractFactory('Transactions');
 
-  await transactionContract.deployed()
+  // Deploying the contract
+  const transactionContract = await transactionFactory.deploy();
 
-  console.log('Transactions deployed to:', transactionContract.address)
-}
+  // Waiting for the contract to be deployed
+  await transactionContract.deployed();
 
-;(async () => {
+  // Logging the address where the contract is deployed
+  console.log('Transactions deployed to:', transactionContract.address);
+};
+
+// Self-invoking async function to handle the promise returned by main()
+(async () => {
   try {
-    await main()
-    process.exit(0)
+    // Attempting to deploy the contract
+    await main();
+
+    // Exiting the process with a success status
+    process.exit(0);
   } catch (error) {
-    console.error(error)
-    process.exit(1)
+    // Logging any errors that occur during deployment
+    console.error(error);
+
+    // Exiting the process with a failure status
+    process.exit(1);
   }
-})()
+})();

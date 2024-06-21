@@ -1,120 +1,108 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { contractABI, contractAddress } from './lib/constants'
-import { ethers } from 'ethers'
-import { client } from '../lib/sanityClient'
-import { useRouter } from 'next/router'
-import WelcomeUser from '../components/toast/WelcomeUser'
-import Loading from '../components/toast/Loading'
+import React, { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import { useRouter } from 'next/router';
+import { contractABI, contractAddress } from './lib/constants';
+import { client } from '../lib/sanityClient';
+import WelcomeUser from '../components/toast/WelcomeUser';
+import Loading from '../components/toast/Loading';
 
-export const TransactionContext = React.createContext()
+// Create context for transactions
+export const TransactionContext = React.createContext();
 
-let eth
-
-
-
-if (typeof window != 'undefined') {
-  eth = window.ethereum
+//Checking if window object is available if so Initialize Ethereum object
+let eth;
+if (typeof window !== 'undefined') {
+  eth = window.ethereum;
 }
 
+// Function to get Ethereum contract
 const getEthereumContract = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum)
-  const signer = provider.getSigner()
-  const transactionContract = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  )
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+  const transactionContract = new ethers.Contract(contractAddress, contractABI, signer);
+  return transactionContract;
+};
 
-  return transactionContract
-}
-
+// Transaction Provider Component
 export const TransactionProvider = ({ children }) => {
-  const [currentAccount, setCurrentAccount] = useState()
-  const [isLoading, setIsLoading] = useState()
-  const [amount, setAmount] = useState()
-  const [image, setImage] = useState()
-  const [name, setName] = useState()
-  const router = useRouter()
-  // const location = useLocation()
+  // Using useState hook for various states
+  const [currentAccount, setCurrentAccount] = useState();
+  const [isLoading, setIsLoading] = useState();
+  const [amount, setAmount] = useState();
+  const [image, setImage] = useState();
+  const [name, setName] = useState();
+  const router = useRouter();
 
-  const address = '0x7E219E6f983187EB35F9B2D6816DF084a616d28c'
+  const address = '0x7E219E6f983187EB35F9B2D6816DF084a616d28c';
 
   const formData = {
     addressTo: { address },
     amount: { amount },
-  }
+  };
 
   const NftData = {
     image: { image },
     name: { name },
-  }
+  };
 
+  // useEffect hook to check if wallet is connected
   useEffect(() => {
-    checkIfWalletIsConnected()
-  }, [])
+    checkIfWalletIsConnected();
+  }, []);
 
-  /**
-   * Create user profile in Sanity
-   */
+  // Create user profile in Sanity
   useEffect(() => {
-    if (!currentAccount) return
-    ;(async () => {
+    if (!currentAccount) return;
+    (async () => {
       const userDoc = {
         _type: 'users',
         _id: currentAccount,
         userName: 'Unnamed',
         walletAddress: currentAccount,
-      }
+      };
+      await client.createIfNotExists(userDoc);
+      WelcomeUser(userDoc.userName);
+    })();
+  }, [currentAccount]);
 
-      await client.createIfNotExists(userDoc)
-
-
-      WelcomeUser(userDoc.userName)
-    })()
-  }, [currentAccount])
-
+  // Function to connect wallet
   const connectWallet = async (metamask = eth) => {
     try {
-      if (!metamask) return alert('Please install metamask')
-      const accounts = await metamask.request({ method: 'eth_requestAccounts' })
-      setCurrentAccount(accounts[0])
+      if (!metamask) return alert('Please install Metamask');
+      const accounts = await metamask.request({ method: 'eth_requestAccounts' });
+      setCurrentAccount(accounts[0]);
     } catch (error) {
-      console.log(error)
-      throw new Error('No ethereum object.')
+      console.error(error);
+      throw new Error('No Ethereum object.');
     }
-  }
+  };
 
+  // Function to check if wallet is connected
   const checkIfWalletIsConnected = async (metamask = eth) => {
     try {
-      if (!metamask) return alert('Please install metamask')
-      const accounts = await metamask.request({ method: 'eth_accounts' })
-
+      if (!metamask) return alert('Please install Metamask');
+      const accounts = await metamask.request({ method: 'eth_accounts' });
       if (accounts.length) {
-        setCurrentAccount(accounts[0])
-        console.log('wallet is already connected to metamask')
+        setCurrentAccount(accounts[0]);
+        console.log('Wallet is already connected to Metamask');
       }
     } catch (error) {
-      console.log(error)
-      throw new Error('No ethereum object.')
+      console.error(error);
+      throw new Error('No Ethereum object.');
     }
-  }
+  };
 
-  const sendTransaction = async (
-    metamask = eth,
-    connectedAccount = currentAccount
-  ) => {
+  // Function to send transaction
+  const sendTransaction = async (metamask = eth, connectedAccount = currentAccount) => {
     try {
-      if (!metamask) return alert('Please install metamask ')
+      if (!metamask) return alert('Please install Metamask');
 
-      const { addressTo, amount } = formData // gets a destructured value for the receiver address and amount
-      const { image, name } = NftData //gets a destructured value for the imageUrl and the NFT name from the usestate hook
+      const { addressTo, amount } = formData; // Gets a destructured value for the receiver address and amount
+      const { image, name } = NftData; // Gets a destructured value for the image URL and the NFT name from the useState hook
 
-      const transactionContract = getEthereumContract()
-
-      const parsedAmount = ethers.utils.parseEther(amount.amount)
-      const parsedAddress = addressTo.address
-
+      const transactionContract = getEthereumContract();
+      const parsedAmount = ethers.utils.parseEther(amount.amount);
+      const parsedAddress = addressTo.address;
 
       await metamask.request({
         method: 'eth_sendTransaction',
@@ -126,59 +114,47 @@ export const TransactionProvider = ({ children }) => {
             value: parsedAmount._hex,
           },
         ],
-      })
+      });
 
       const transactionHash = await transactionContract.publishTransaction(
-        addressTo.address,
-        parsedAmount,
-        `Transferring ETH ${parsedAmount} to ${addressTo.address}`,
-        'TRANSFER'
-      )
+          addressTo.address,
+          parsedAmount,
+          `Transferring ETH ${parsedAmount} to ${addressTo.address}`,
+          'TRANSFER'
+      );
 
-      setIsLoading(true)
-      Loading()
+      setIsLoading(true);
+      Loading();
 
-      await transactionHash.wait()
+      await transactionHash.wait();
 
-      // FOR DB
+      // Save transaction in DB
       await saveTransaction(
-        transactionHash.hash,
-        amount.amount,
-        connectedAccount,
-        parsedAddress,
-        image.image,
-        name.name
-      )
+          transactionHash.hash,
+          amount.amount,
+          connectedAccount,
+          parsedAddress,
+          image.image,
+          name.name
+      );
 
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
-      console.log(error)
+      console.error(error);
     }
-  }
+  };
 
-  const handleChange = (price) => {
-    return setAmount(price)
-  }
+  // Function to handle amount change
+  const handleChange = (price) => setAmount(price);
 
-  const handleImage = (image) => {
-    return setImage(image)
-  }
+  // Function to handle image change
+  const handleImage = (image) => setImage(image);
 
-  const handleName = (name) => {
-    return setName(name)
-  }
+  // Function to handle name change
+  const handleName = (name) => setName(name);
 
-
-
-  // Adding Selected Nft to set of Collected Item
-  const saveTransaction = async (
-    txHash,
-    amount,
-    fromAddress = currentAccount,
-    toAddress,
-    image,
-    name
-  ) => {
+  // Function to save transaction
+  const saveTransaction = async (txHash, amount, fromAddress = currentAccount, toAddress, image, name) => {
     const txDoc = {
       _type: 'transactions',
       _id: txHash,
@@ -189,63 +165,57 @@ export const TransactionProvider = ({ children }) => {
       cImg: image,
       cName: name,
       amount: parseFloat(amount),
-    }
+    };
 
-    await client.createIfNotExists(txDoc)
-
-    
-
-
+    await client.createIfNotExists(txDoc);
 
     await client
-      .patch(currentAccount)
-      .setIfMissing({ transactions: [] })
-      .insert('after', 'transactions[-1]', [
-        {
-          _key: txHash,
-          _ref: txHash,
-          _type: 'reference',
-        },
-      ])
-      .commit()
-    return
-  }
+        .patch(currentAccount)
+        .setIfMissing({ transactions: [] })
+        .insert('after', 'transactions[-1]', [
+          {
+            _key: txHash,
+            _ref: txHash,
+            _type: 'reference',
+          },
+        ])
+        .commit();
+  };
 
-  // console.log("checking the isLoadng", typeof isLoading)
-
-  // Preloader Modal for trandaction in progress
+  // Preloader modal for transaction in progress
   useEffect(() => {
-
-    if(typeof isLoading === 'undefined') return
-    
-    if(isLoading) {
-      // console.log(window.location.href)
-      router.push(`${window.location.href}/?loading=${currentAccount}`)
+    if (typeof isLoading === 'undefined') return;
+    if (isLoading) {
+      router.push(`${window.location.href}/?loading=${currentAccount}`);
+    } else {
+      router.push('/profile');
     }
-    else{
-      
-      router.push('/profile')
-      // WelcomeUser("transaction")
-    }
+  }, [isLoading]);
 
-  }, [isLoading])
-
-
+  // Returning TransactionContext.Provider
   return (
-    <TransactionContext.Provider
-      value={{
-        connectWallet,
-        currentAccount,
-        sendTransaction,
-        handleChange,
-        handleImage,
-        handleName,
-        formData,
-        NftData,
-        isLoading,
-      }}
-    >
-      {children}
-    </TransactionContext.Provider>
-  )
-}
+      <TransactionContext.Provider
+          value={{
+            connectWallet,
+            currentAccount,
+            sendTransaction,
+            handleChange,
+            handleImage,
+            handleName,
+            formData,
+            NftData,
+            isLoading,
+          }}
+      >
+        {children}
+      </TransactionContext.Provider>
+  );
+};
+
+
+
+
+
+
+
+

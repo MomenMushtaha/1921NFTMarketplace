@@ -20,18 +20,18 @@ function Footer() {
 
               <div className=" text-2xl font-bold">
                 <span className="hover:scale-102 transform pr-4 transition duration-200 ease-out hover:text-red-100 ">
-                  BaseMint
+                  1921Marketplace
                 </span>
               </div>
             </div>
-            {/* <h1 className='text-xl font-bold cursor-pointer'>BaseMint</h1> */}
+            {/* <h1 className='text-xl font-bold cursor-pointer'>1921Marketplace</h1> */}
           </Link>
 
           <p className={style.ptag}>
-            Base Mint is the largest and most active NFT marketplace on the
-            Ethereum blockchain. Through BaseMint, anybody can easily and
+            1921Marketplace is the largest and most active NFT marketplace on the
+            Ethereum blockchain. Through 1921Marketplace, anybody can easily and
             quickly, mint, and buy NFTs at a fraction of the cost of other NFT
-            platforms. Base Mint also provides feeless NFT transfers.
+            platforms. 1921Marketplace also provides feeless NFT transfers.
           </p>
         </div>
         <div className={style.mainDiv}>
@@ -117,10 +117,10 @@ function Footer() {
       <div className={style.mainContainer}>
         <div className="text-red-100">
           <div>
-            © Copyright 2022 &nbsp;
+            © Copyright 2024 &nbsp;
             <Link href="/">
               <span className="cursor-pointer hover:text-red-100 hover:underline">
-                BaseMint
+                1921Marketplace
               </span>
             </Link>
             &nbsp; -All Rights Reserved
