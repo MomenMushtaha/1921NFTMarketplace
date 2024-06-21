@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
       <div className='overflow-hidden'>
         <Head>
-          <title>1921Marketplace</title>
+          <title>1921NFTMarketplace</title>
           <link rel="icon" href="/opensea.ico" />
         </Head>
 

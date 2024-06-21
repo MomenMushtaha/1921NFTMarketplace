@@ -6,11 +6,11 @@ import { sanityClient, urlFor } from '../sanity'
 
 // Defining styles for the component
 const style = {
-  wrapper: `bg-[#8B0000] max-w-sm flex-auto w-[14rem] h-[14rem] my-10 mx-5 overflow-hidden cursor-pointer rounded-xl hover:border-solid hover:shadow-2xl hover:scale-105 transition transform duration-100 ease-out border-dashed border-2 border-[#8B0000]`,
-  imagecontainer: `h-2/3 w-full overflow-hidden`,
-  imgtag: `w-full h-full object-cover`,
-  infoconainer: `h-20 bg-[#8B0000] p-4 rounded-b-lg flex items-center text-[#f73455] mx-4`,
-  title: `flex flex-col justify-center ml-4 text-[#ffcccb]`,
+    wrapper: `bg-[#8B0000] max-w-sm flex-auto w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 h-[14rem] my-10 mx-5 overflow-hidden cursor-pointer rounded-xl hover:border-solid hover:shadow-2xl hover:scale-105 transition transform duration-100 ease-out border-dashed border-2 border-[#8B0000]`,
+    imagecontainer: `h-2/3 w-full overflow-hidden`,
+    imgtag: `w-full h-full object-cover`,
+    infoconainer: `h-20 bg-[#8B0000] p-4 rounded-b-lg flex items-center text-[#f73455] mx-4`,
+    title: `flex flex-col justify-center ml-4 text-[#ffcccb]`,
 }
 
 /**

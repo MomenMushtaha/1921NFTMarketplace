@@ -45,8 +45,8 @@ const Header = () => {
         <div className="flex items-center">
           <Link href="/">
             <div className={style.logoContainer}>
-              <Image src={appLogo} height={40} width={40} alt="1921Marketplace Logo" />
-              <div className={style.logoText}>1921Marketplace</div>
+              <Image src={appLogo} height={40} width={40} alt="1921NFTMarketplace Logo" />
+              <div className={style.logoText}>1921NFTMarketplace</div>
             </div>
           </Link>
 

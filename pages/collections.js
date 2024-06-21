@@ -50,7 +50,7 @@ export async function getServerSideProps() {
         title,
         "image": profileImage.asset,
         contractAddress,
-    }`
+    }[0..11]`
 
   const items = await sanityClient.fetch(query)
 

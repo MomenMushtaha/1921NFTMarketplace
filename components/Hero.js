@@ -41,7 +41,7 @@ const Hero = () => {
                 Discover, collect, and sell extraordinary NFTs
               </div>
               <div className={style.description}>
-                1921Marketplace is the world&apos;s largest and most reliable NFT
+                1921NFTMarketplace is the world&apos;s largest and most reliable NFT
                 marketplace
               </div>
 

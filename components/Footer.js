@@ -19,19 +19,19 @@ function Footer() {
           <div className={style.mainDiv}>
             <Link href="/">
               <div className="flex cursor-pointer items-center space-x-4">
-                <Image src={appLogo} height={40} width={40} alt="1921Marketplace Logo" />
+                <Image src={appLogo} height={40} width={40} alt="1921NFTMarketplace Logo" />
                 <div className="text-2xl font-bold">
                 <span className="hover:scale-102 transform pr-4 transition duration-200 ease-out hover:text-red-100">
-                  1921Marketplace
+                  1921NFTMarketplace
                 </span>
                 </div>
               </div>
             </Link>
             <p className={style.ptag}>
-              1921Marketplace is the largest and most active NFT marketplace on the
-              Ethereum blockchain. Through 1921Marketplace, anybody can easily and
+              1921NFTMarketplace is the largest and most active NFT marketplace on the
+              Ethereum blockchain. Through 1921NFTMarketplace, anybody can easily and
               quickly mint and buy NFTs at a fraction of the cost of other NFT
-              platforms. 1921Marketplace also provides feeless NFT transfers.
+              platforms. 1921NFTMarketplace also provides feeless NFT transfers.
             </p>
           </div>
 
@@ -118,7 +118,7 @@ function Footer() {
               © Copyright 2024 &nbsp;
               <Link href="/">
               <span className="cursor-pointer hover:text-red-100 hover:underline">
-                1921Marketplace
+                1921NFTMarketplace
               </span>
               </Link>
               &nbsp; - All Rights Reserved

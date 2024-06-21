@@ -23,11 +23,11 @@ Modal.setAppElement('#__next');
 // Styles for various elements in the Nft component
 const style = {
   wrapper: `flex flex-col items-center container-lg text-[#ffcccb] overflow-hidden`,
-  container: `container p-6`,
+  container: `container p-6 bg-[#8B0000]`,
   topContent: `flex`,
   nftImgContainer: `flex-1 mr-4`,
   detailsContainer: `flex-[2] ml-4`,
-  topBar: `bg-[#ffcccb] p-2 rounded-t-lg border-[#ffcccb] border`,
+  topBar: `bg-[#8B0000] p-2 rounded-t-lg border-[#ffcccb] border`,
   topBarContent: `flex items-center`,
   likesCounter: `flex-1 flex items-center justify-end`,
 };
@@ -45,7 +45,7 @@ const customStyles = {
     border: 'none',
   },
   overlay: {
-    backgroundColor: 'rgba(10, 11, 13, 0.75)',
+    backgroundColor: 'rgba(13,10,10,0.75)',
   },
 };
 
