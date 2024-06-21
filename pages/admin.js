@@ -21,7 +21,7 @@ export default function Admin({ items }) {
           ADMIN
         </h1>
 
-        <div className="mx-auto max-w-7xl px-8 sm:px-16">
+        <div className="mx-auto">
           <table className="bg-red-600 table-auto text-[#ffcccb]">
             <thead className="text-5xl">
             <tr>

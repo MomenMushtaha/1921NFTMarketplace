@@ -139,7 +139,7 @@ export default createSchema({
       transactionSchema,
           {
             name: 'description',
-            title: 'Descripton',
+            title: 'Description',
             type: 'string',
           },
 

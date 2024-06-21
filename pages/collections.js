@@ -24,7 +24,7 @@ export default function Collection({ items }) {
 
         <div className="mx-auto max-w-7xl px-8 sm:px-16">
           <div className="pt-2">
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-center items-center">
               {items.map((item, id) => (
                   <CollectionCard
                       key={id}
