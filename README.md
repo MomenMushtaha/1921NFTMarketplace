@@ -23,6 +23,12 @@
 
 ## Getting Started
 
+### Home Page
+![Home Page](assets/Home.png)
+
+### NFT Page
+![NFT Page](assets/AllNfts.png)
+
 ### Prerequisites
 - Node.js
 - npm or yarn
