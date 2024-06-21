@@ -66,9 +66,3 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## Contact
 Momen Mushtaha - mush.momen@gmail.com
-
-## Acknowledgements
-- Ethereum Community
-- React.js and Next.js documentation
-- Hardhat documentation
-- Sanity.io documentation
