@@ -36,13 +36,15 @@ const Hero = () => {
       <div className={style.wrapper}>
         <div className={style.container}>
           <div className={style.contentWrapper}>
-            <div className={style.copyContainer}>
+
+            <div className={style.copyContainer}>   // component 1 inside the content wrapper: copy container
+
               <div className={style.title}>
                 Discover, collect, and sell extraordinary NFTs
               </div>
+
               <div className={style.description}>
-                1921NFTMarketplace is the world&apos;s largest and most reliable NFT
-                marketplace
+                1921NFTMarketplace is the world&apos;s largest and most reliable NFT marketplace
               </div>
 
               <div className={style.ctaContainer}>
@@ -50,31 +52,32 @@ const Hero = () => {
                   <button className={style.accentedButton}>Explore</button>
                 </Link>
               </div>
+
             </div>
 
-            <div className={style.cardContainer}>
+            <div className={style.cardContainer}> // component 2 inside the content wrapper: card container
+
               <div className={style.infoContainer}>
                 <img
-                    className={style.profileimg}
+                    className={style.profileimg} // to be changed
                     src="https://lh3.googleusercontent.com/pqR3PEN7lUuAwTZpk_sjbKKGQVbj4jIj_OFGDmNW1wGKPgygR6tpM0sAcbuMjis84ddfeokjzWjAMNQYw0VpNyIkx6OwjQFifxLHlw=s80"
                     alt="profile picture"
                 />
 
                 <div className={style.author}>
-                  <div className={style.name}>Future Proof Visions #108</div>
 
-                  <a
-                      className="text-[#ffcccb]"
-                      name="Scott"
-                  >
-                    Scott
-                  </a>
+                  <div className={style.name}> Mush Labs </div>
+                  <a className="text-[#ffcccb]" name="Mo'men"> Mo'men </a>
+
                 </div>
+
               </div>
             </div>
+
           </div>
         </div>
 
+        // why 3 breaks?
         <br />
         <br />
         <br />

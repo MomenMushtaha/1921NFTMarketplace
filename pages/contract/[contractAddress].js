@@ -67,7 +67,7 @@ const Item = ({
                 description,
                 params,
               }) => (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden"> // overflow-hidden??
       {/* Banner Image */}
       <div className={style.bannerImageContainer}>
         <img src={bannerImageUrl} alt="Banner Image" className={style.bannerImage} />

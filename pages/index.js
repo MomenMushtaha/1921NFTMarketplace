@@ -81,6 +81,7 @@ export default function Home({ items }) {
               <br />
               <br />
               <br />
+              // why 3 containers?
             </div>
           </section>
         </div>
@@ -106,6 +107,7 @@ export default function Home({ items }) {
               ))}
             </div>
 
+            # 7 breaks!
             <br />
             <br />
             <br />
@@ -117,7 +119,7 @@ export default function Home({ items }) {
         </div>
 
         <Footer />
-      </>
+      </> //?
     </div>
   )
 }

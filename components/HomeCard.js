@@ -60,7 +60,7 @@ const HomeCard = ({
                 alt="profile"
             />
 
-            <div className={style.title}>{title}</div>
+            <div className={style.title}>{title}</div> // between the curly brackets {title}??
           </div>
           <h4 className="px-3 pb-6 text-sm text-[#ffcccb]">{description}</h4>
         </div>
