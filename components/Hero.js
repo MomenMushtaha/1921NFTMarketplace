@@ -37,7 +37,7 @@ const Hero = () => {
         <div className={style.container}>
           <div className={style.contentWrapper}>
 
-            <div className={style.copyContainer}>   // component 1 inside the content wrapper: copy container
+            <div className={style.copyContainer}>
 
               <div className={style.title}>
                 Discover, collect, and sell extraordinary NFTs
@@ -55,20 +55,19 @@ const Hero = () => {
 
             </div>
 
-            <div className={style.cardContainer}> // component 2 inside the content wrapper: card container
+            <div className={style.cardContainer}>
 
               <div className={style.infoContainer}>
                 <img
                     className={style.profileimg} // to be changed
-                    src="https://lh3.googleusercontent.com/pqR3PEN7lUuAwTZpk_sjbKKGQVbj4jIj_OFGDmNW1wGKPgygR6tpM0sAcbuMjis84ddfeokjzWjAMNQYw0VpNyIkx6OwjQFifxLHlw=s80"
+                    src="https://statics.solscan.io/cdn/imgs/s60?ref=68747470733a2f2f676174657761792e70696e6174612e636c6f75642f697066732f516d66434b486953574d723746654d513671455750766b44356a6377664c3878675442574454506a6e5159737a58"
                     alt="profile picture"
                 />
 
                 <div className={style.author}>
 
                   <div className={style.name}> Mush Labs </div>
-                  <a className="text-[#ffcccb]" name="Mo'men"> Mo'men </a>
-
+                  @mushlabs
                 </div>
 
               </div>
