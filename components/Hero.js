@@ -40,7 +40,7 @@ const Hero = () => {
             <div className={style.copyContainer}>
 
               <div className={style.title}>
-                Discover, collect, and sell extraordinary NFTs
+                Discover, collect, and sell NFTs!
               </div>
 
               <div className={style.description}>
