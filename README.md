@@ -24,7 +24,7 @@
 ## Getting Started
 
 ### Home Page
-![Home Page](assets/Home.png)
+![Home Page](assets/1921NFTMarketplace-Demo.png)
 
 ### NFT Page
 ![NFT Page](assets/AllNfts.png)
